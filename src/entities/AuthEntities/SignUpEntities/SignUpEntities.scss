@@ -1,0 +1,39 @@
+@import "../../../shared/variables.scss";
+
+.head {
+  background-color: $orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+
+    &--firstLine {
+      color: $white;
+      font-size: 40px;
+      font-weight: 300;
+    }
+
+    &--secondLine {
+      color: $white;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 40px;
+      margin-left: 70px;
+    }
+
+    @media screen and (max-width: 615px) {
+      &--firstLine {
+        font-size: 20px;
+      }
+
+      &--secondLine {
+        font-size: 20px;
+        margin-left: 40px;
+      }
+    }
+  }
+}

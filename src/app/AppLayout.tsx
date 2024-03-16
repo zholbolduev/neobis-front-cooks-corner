@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from "react-router";
+import "./globalStyles.scss";
 
 const AppLayout = () => {
   const { pathname } = useLocation();
