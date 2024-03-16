@@ -1,0 +1,19 @@
+@import "../../variables.scss";
+
+.ui-btn,
+.ui-btn_orange,
+.ui-btn_TFaded {
+  color: $white;
+  padding: 10px 20px;
+  height: 50px;
+  border-radius: $radius;
+}
+
+.ui-btn,
+.ui-btn_orange {
+  border: 2px solid $orange;
+}
+
+.ui-btn_TFaded {
+  border: 2px solid $TFaded;
+}
