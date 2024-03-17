@@ -1,0 +1,47 @@
+@import "../../shared/variables.scss";
+
+.card {
+  height: 220px;
+  border-radius: 20px;
+  padding: 20px 20px 13px 12px;
+
+  .link {
+    text-decoration: none;
+  }
+
+  &--name {
+    color: $white;
+    font-size: 20px;
+    padding-top: 99px;
+    margin-bottom: 8px;
+    text-decoration: none;
+  }
+
+  &--author {
+    color: $white;
+    font-size: 13px;
+    margin-bottom: 8px;
+    font-weight: 200;
+  }
+
+  &__likeBlock {
+    color: $white;
+
+    > img {
+      margin-bottom: -3px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+  }
+
+  &__savedBlock {
+    color: $white;
+    margin-left: 9px;
+
+    > img {
+      margin-bottom: -3px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+  }
+}

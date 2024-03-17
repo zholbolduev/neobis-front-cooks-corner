@@ -4,10 +4,12 @@ import {
   ThunkAction,
   Action,
 } from "@reduxjs/toolkit";
-import signInreducer from "../features/AuthFeatures/SignInFeatures/model/SignInFeaturesSlice";
+import signInReducer from "../features/AuthFeatures/SignInFeatures/model/SignInFeaturesSlice";
+import signUpReducer from "../features/AuthFeatures/SignUpFeatures/model/SignUpFeaturesSlice";
 
 const rootReducers = combineReducers({
-  signInSlice: signInreducer,
+  signInSlice: signInReducer,
+  signUpSlice: signUpReducer,
 });
 
 export const setupStore = () => {

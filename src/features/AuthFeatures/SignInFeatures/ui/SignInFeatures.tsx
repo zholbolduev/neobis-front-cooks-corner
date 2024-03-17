@@ -9,12 +9,13 @@ import {
 import { useEffect, useState } from "react";
 import { SignInAPI } from "../api/SignInFeaturesAPI";
 import { useNavigate } from "react-router";
-import eyeClosed from "../../assets/eyeClosed.svg";
-import eyeOpened from "../../assets/eyeOpened.svg";
+import eyeClosed from "../../assets/eye-closed.svg";
+import eyeOpened from "../../assets/eye-opened.svg";
 import "./SignInFeatures.scss";
 import dogGmail from "../../assets/dog.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 const SignInFeatures = () => {
   const { error } = useAppSelector((state) => state.signInSlice);
@@ -74,7 +75,7 @@ const SignInFeatures = () => {
                 />
 
                 <img
-                  className="signIn__form__label--iconG"
+                  className="signIn__form__label--icon"
                   src={dogGmail}
                   alt="Eye"
                 />
@@ -97,7 +98,7 @@ const SignInFeatures = () => {
                 />
 
                 <img
-                  className="signIn__form__label--iconP"
+                  className="signIn__form__label--icon"
                   onClick={() => setShowPassword(!showPassword)}
                   src={showPassword ? eyeClosed : eyeOpened}
                   alt="Eye"
@@ -122,6 +123,13 @@ const SignInFeatures = () => {
               >
                 Sign In
               </button>
+
+              <span className="signUp__form--span">
+                I don’t have an account?
+                <Link className="signUp__form--span--link" to={"/register"}>
+                  Sign Up Now
+                </Link>
+              </span>
             </Form>
           )}
         </Formik>

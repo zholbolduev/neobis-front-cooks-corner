@@ -1,0 +1,110 @@
+@import "../../../../shared/variables.scss";
+
+.signUp {
+  display: flex;
+  flex-direction: column;
+
+  &__blockForm {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+
+    &__label {
+      position: relative;
+      margin-bottom: 25px;
+
+      &--name {
+        color: $orange;
+        font-size: 18px;
+      }
+
+      &--icon {
+        position: absolute;
+        right: 22px;
+        margin-top: 14px;
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 618px) {
+        &--icon {
+          margin-top: 9px;
+        }
+      }
+
+      .errorMessage {
+        color: red;
+      }
+    }
+
+    &--inputs {
+      width: 100%;
+      height: 50px;
+      padding-left: 23px;
+      padding-right: 23px;
+      border-radius: $radius;
+      background-color: $trans;
+      border: none;
+      font-size: 17px;
+    }
+
+    @media screen and (max-width: 618px) {
+      &--inputs {
+        height: 40px;
+        font-size: 12px;
+      }
+    }
+
+    &--fullBtn {
+      background-color: $orange;
+      height: 50px;
+      width: 100%;
+      border-radius: $radius;
+      border: 1px solid $orange;
+      padding: 5px;
+      color: $white;
+      font-size: 20px;
+      cursor: pointer;
+      margin-bottom: 25px;
+    }
+
+    &--fullBtn:hover {
+      background-color: $white;
+      transition: 200ms;
+      color: $orange;
+    }
+
+    &--emptyBtn {
+      background-color: $TFaded;
+      height: 50px;
+      width: 100%;
+      border-radius: $radius;
+      border: none;
+      padding: 5px;
+      color: $white;
+      font-size: 20px;
+      cursor: not-allowed;
+      margin-bottom: 25px;
+    }
+
+    &--span {
+      font-size: 14px;
+      margin-bottom: 50px;
+      text-align: center;
+
+      &--link {
+        color: $orange;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 6px;
+      }
+    }
+  }
+}

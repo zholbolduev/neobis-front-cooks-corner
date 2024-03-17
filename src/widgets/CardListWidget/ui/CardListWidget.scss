@@ -1,0 +1,102 @@
+@import "../../../shared/variables.scss";
+
+.cardListWidget {
+  > h2 {
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  > ul {
+    display: flex;
+    list-style-type: none;
+    margin-bottom: 20px;
+
+    > li:first-child {
+      margin-left: 0px;
+    }
+
+    > li {
+      cursor: pointer;
+      margin-left: 80px;
+
+      > p {
+        width: 30px;
+        height: 2px;
+        background-color: $text;
+      }
+
+      .breackP {
+        margin-left: 28%;
+      }
+
+      .lunchP {
+        margin-left: 20%;
+      }
+
+      .dinnerP {
+        margin-left: 22%;
+      }
+    }
+
+    > li.active a {
+      color: $text;
+    }
+
+    > li:last-child {
+      margin-right: 0;
+    }
+
+    > li a {
+      color: #666;
+      font-style: normal;
+      line-height: normal;
+      cursor: pointer;
+    }
+
+    > li:hover {
+      color: $text;
+    }
+  }
+
+  @media screen and (max-width: 423px) {
+    > ul li {
+      margin-left: 15px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 2200px) {
+    &__list {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 1780px) {
+    &__list {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 1270px) {
+    &__list {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 870px) {
+    &__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+}

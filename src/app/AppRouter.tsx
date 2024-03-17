@@ -5,13 +5,18 @@ import AppLayout from "./AppLayout";
 import HomePage from "../pages/HomePage/HomePage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import SearchPage from "../pages/SearchPage/SearchPage";
+import DetailsPage from "../pages/DetailsPage/DetailsPage";
 
 const AppRouter = () => {
   return (
     <Routes>
       <Route element={<AppLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="/profile-page" element={<ProfilePage />} />
+        <Route path="/details/:id" element={<DetailsPage />} />
+
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/search" element={<SearchPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
