@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import "./CardEntities.scss";
-import unlike from "./assets/unlike.svg";
-import liked from "./assets/like.svg";
-import unsaved from "./assets/unsaved.svg";
-import saved from "./assets/saved.svg";
+import unlike from "../../shared/assets/unlike.svg";
+import liked from "../../shared/assets/like.svg";
+import unsaved from "../../shared/assets/unsaved.svg";
+import saved from "../../shared/assets/saved.svg";
 import { FC, useState } from "react";
 import { Card } from "./types";
 

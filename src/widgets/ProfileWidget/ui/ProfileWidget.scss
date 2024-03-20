@@ -1,0 +1,192 @@
+@import "../../../shared/variables.scss";
+
+.profileWidget {
+  &__userContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 51px;
+    margin-bottom: 95px;
+    margin-top: 80px;
+
+    &__img {
+      > img {
+        width: 200px;
+        height: 200px;
+        border-radius: 200px;
+      }
+    }
+
+    @media screen and (max-width: 463px) {
+      &__img {
+        > img {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__numbers {
+        display: flex;
+        margin-bottom: 16px;
+        gap: 17px;
+
+        > div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+
+          > span {
+            color: $text;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 28px;
+          }
+
+          > p {
+            color: $TFaded;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 28px;
+          }
+
+          @media screen and (max-width: 440px) {
+            > span {
+              font-size: 19px;
+            }
+          }
+        }
+      }
+
+      &--name {
+        color: $text;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 28px;
+        margin-bottom: 5px;
+      }
+
+      &--desc {
+        color: $TFaded;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+        width: 100%;
+      }
+
+      &--btn {
+        display: flex;
+        width: 100%;
+        height: 56px;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 12px;
+        background: $beige;
+        color: $orange;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 17px;
+        margin-top: 20px;
+      }
+
+      &--btn:hover {
+        background: $orange;
+        transition: 250ms;
+        color: $white;
+      }
+    }
+  }
+
+  @media screen and (max-width: 579px) {
+    &__userContainer {
+      display: flex;
+      flex-direction: column;
+      margin-top: 0px;
+      gap: 10px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 2200px) {
+    &__list {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 1780px) {
+    &__list {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 1270px) {
+    &__list {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 870px) {
+    &__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media screen and (max-width: 463px) {
+  .profileWidget {
+    margin-left: 20px;
+    margin-right: -20px;
+  }
+}
+
+.profileWidget__modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+}
+
+@media screen and (max-width: 580px) {
+  .profileWidget__modal {
+    width: 260px;
+  }
+}
+
+.profileWidget__modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
