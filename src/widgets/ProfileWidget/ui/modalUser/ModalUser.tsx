@@ -33,7 +33,7 @@ const ModalUser: React.FC<ModalUserProps> = ({ closeModal }) => {
 
       await axios.put(`${baseAPI}/api/users/update_profile`, formData, {
         headers: {
-          Authorization: accessToken,
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
         },
       });
