@@ -1,41 +1,26 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./RecipeEntities.scss";
+import { fetchRecipes } from "../api/RecipeEntities";
+import { IRecipe } from "../model/types";
 import unliked from "../../../shared/assets/unlike.svg";
 import liked from "../../../shared/assets/like.svg";
 import saved from "../../../shared/assets/saved.svg";
 import unsaved from "../../../shared/assets/unsaved.svg";
-import { IRecipe } from "../model/types";
-import { baseAPI } from "../../../shared/baseAPI";
-// import { useNavigate } from "react-router";
+import "./RecipeEntities.scss";
 
-const RecipeEntities = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+const RecipeEntities: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [recipes, setRecipes] = useState<IRecipe[]>([]);
-  // const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchRecipes = async () => {
-      try {
-        const user = JSON.parse(localStorage.getItem("user") || "");
-        const accessToken = user.accessToken;
+    const user = JSON.parse(localStorage.getItem("user") || "");
+    const accessToken = user.accessToken;
 
-        const response = await axios.get(`${baseAPI}/api/recipes/search`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          params: {
-            query: searchQuery,
-          },
-        });
-
-        setRecipes(response.data);
-      } catch (error) {
-        console.error("Error searching recipes:", error);
-      }
+    const fetchData = async () => {
+      const data = await fetchRecipes(searchQuery, accessToken);
+      setRecipes(data);
     };
 
-    fetchRecipes();
+    fetchData();
   }, [searchQuery]);
 
   const handleSearchInputChange = (
@@ -57,11 +42,7 @@ const RecipeEntities = () => {
 
       <div className="recipeEntities__cardsBlock">
         {recipes.map((recipe, id) => (
-          <div
-            // onClick={() => navigate(`/details/${id}`)}
-            key={id}
-            className="recipeEntities__cardsBlock--card"
-          >
+          <div key={id} className="recipeEntities__cardsBlock--card">
             <img
               className="recipeEntities__cardsBlock--card--photo"
               src={recipe.imageUrl}

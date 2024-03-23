@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CardEntities from "../../../entities/CardEntities/CardEntities";
 import "./CardListWidget.scss";
-import axios from "axios";
-import { baseAPI } from "../../../shared/baseAPI";
+import { fetchRecipesByCategory } from "../api/CardListWidgetAPI";
 
-const CardListWidget = () => {
+const CardListWidget: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("breakfast");
-  const [cardList, setCardList] = useState([]);
+  const [cardList, setCardList] = useState<any[]>([]);
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
@@ -15,24 +14,10 @@ const CardListWidget = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const user = JSON.parse(localStorage.getItem("user") || "");
-        const accessToken = user.accessToken;
-        console.log(accessToken);
-
-        const response = await axios.get(
-          `${baseAPI}/api/recipes/get_by_category?category=${activeTab}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
-        console.log(response.data);
-        setCardList(response.data);
-      } catch (error) {
-        console.error("Error fetching recipe data:", error);
-      }
+      const user = JSON.parse(localStorage.getItem("user") || "");
+      const accessToken = user.accessToken;
+      const data = await fetchRecipesByCategory(activeTab, accessToken);
+      setCardList(data);
     };
 
     fetchData();

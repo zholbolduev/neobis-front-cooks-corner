@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./ProfileWidget.scss";
 import Modal from "react-modal";
 import ModalUser from "./modalUser/ModalUser";
 import { IUser } from "../model/types";
-import { baseAPI } from "../../../shared/baseAPI";
-import axios from "axios";
+import { fetchUserData, fetchUserRecipes } from "../api/ProfileWidgetAPI";
 import CardEntities from "../../../entities/CardEntities/CardEntities";
 
 const ProfileWidget: React.FC = () => {
@@ -16,62 +15,18 @@ const ProfileWidget: React.FC = () => {
   const [cardList, setCardList] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const user = JSON.parse(localStorage.getItem("user") || "");
-        const accessToken = user.accessToken;
-
-        if (!accessToken) {
-          console.error("Access token not found in local storage");
-          return;
-        }
-
-        const response = await axios.get(`${baseAPI}/api/users/my_profile`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        setUser(response.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
+    const fetchData = async () => {
+      const userData = await fetchUserData();
+      setUser(userData);
     };
-
-    fetchUserData();
+    fetchData();
   }, []);
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      try {
-        const user = JSON.parse(localStorage.getItem("user") || "");
-        const accessToken = user.accessToken;
-
-        if (!accessToken) {
-          console.error("Access token not found in local storage");
-          return;
-        }
-
-        let endpoint: string;
-        if (selectedTab === "myRecipes") {
-          endpoint = `${baseAPI}/api/recipes/my_recipes`;
-        } else if (selectedTab === "savedRecipes") {
-          endpoint = `${baseAPI}/api/recipes/my_flagged_recipes`;
-        } else {
-          console.error("Invalid selectedTab value");
-          return;
-        }
-
-        const response = await axios.get(endpoint, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        setCardList(response.data);
-      } catch (error) {
-        console.error("Error fetching recipes:", error);
-      }
+      const recipesData = await fetchUserRecipes(selectedTab);
+      setCardList(recipesData);
     };
-
     fetchRecipes();
   }, [selectedTab]);
 

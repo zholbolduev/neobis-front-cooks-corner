@@ -1,35 +1,22 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./ChefsEntities.scss";
-import { baseAPI } from "../../../shared/baseAPI";
+import { fetchChefs } from "../api/ChefsEntitiesAPI";
 import { IChefs } from "../model/types";
+import "./ChefsEntities.scss";
 
-const ChefsEntities = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+const ChefsEntities: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [chefs, setChefs] = useState<IChefs[]>([]);
 
   useEffect(() => {
-    const fetchChefs = async () => {
-      try {
-        const user = JSON.parse(localStorage.getItem("user") || "");
-        const accessToken = user.accessToken;
+    const user = JSON.parse(localStorage.getItem("user") || "");
+    const accessToken = user.accessToken;
 
-        const response = await axios.get(`${baseAPI}/api/users/search`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          params: {
-            query: searchQuery,
-          },
-        });
-
-        setChefs(response.data);
-      } catch (error) {
-        console.error("Error searching chefs:", error);
-      }
+    const fetchData = async () => {
+      const data = await fetchChefs(searchQuery, accessToken);
+      setChefs(data);
     };
 
-    fetchChefs();
+    fetchData();
   }, [searchQuery]);
 
   const handleSearchInputChange = (

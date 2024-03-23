@@ -1,4 +1,9 @@
-export interface IDeatails {
+export interface IIngredient {
+  name: string;
+  amount: string;
+}
+
+export interface IRecipeDetails {
   recipeName: string;
   imageUrl: string;
   author: string;
@@ -8,10 +13,5 @@ export interface IDeatails {
   isLiked: boolean;
   isSaved: boolean;
   description: string;
-  ingredients: [
-    {
-      name: string;
-      amount: string;
-    }
-  ];
+  ingredients: IIngredient[];
 }

@@ -1,58 +1,25 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import "./DeatilsWidget.scss";
+import { fetchRecipeDetails } from "../api/DetailsWidgetAPI";
+import { IRecipeDetails } from "../model/types";
 import time from "../assets/lets-icons_time.svg";
 import saved from "../../../shared/assets/saved.svg";
 import unsaved from "../../../shared/assets/unsaved.svg";
 import liked from "../../../shared/assets/like.svg";
 import unliked from "../../../shared/assets/unlike.svg";
-import { baseAPI } from "../../../shared/baseAPI";
-import axios from "axios";
 
-export interface IDeatails {
-  recipeName: string;
-  imageUrl: string;
-  author: string;
-  cookingTime: string;
-  difficulty: string;
-  likeQuantity: number;
-  isLiked: boolean;
-  isSaved: boolean;
-  description: string;
-  ingredients: [
-    {
-      name: string;
-      amount: string;
-    }
-  ];
-}
-
-const DetailsWidget = () => {
-  const { id } = useParams();
-  const [meal, setMeal] = useState<IDeatails | null>(null);
+const DetailsWidget: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [meal, setMeal] = useState<IRecipeDetails | null>(null);
 
   useEffect(() => {
-    const fetchOneRecipe = async () => {
-      try {
-        const user = JSON.parse(localStorage.getItem("user") || "");
-        const accessToken = user.accessToken;
-        console.log(accessToken);
-
-        const response = await axios.get<IDeatails>(
-          `${baseAPI}/api/recipes/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
-        console.log(response.data);
-        setMeal(response.data);
-      } catch (error) {
-        console.error("Error fetching recipe data:", error);
-      }
+    if (!id) return; // Добавим проверку, чтобы избежать запроса с пустым id
+    const fetchRecipe = async () => {
+      const data = await fetchRecipeDetails(id);
+      setMeal(data);
     };
-    fetchOneRecipe();
+    fetchRecipe();
   }, [id]);
 
   if (!meal) {
