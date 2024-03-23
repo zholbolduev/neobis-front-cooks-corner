@@ -4,7 +4,7 @@ export const registerSchema = Yup.object().shape({
   email: Yup.string()
     .email("Введите корректный адрес почты")
     .required("Поле обязательно для заполнения"),
-  username: Yup.string().required("Поле обязательно для заполнения"),
+  name: Yup.string().required("Поле обязательно для заполнения"),
   password: Yup.string()
     .required("Поле обязательно для заполнения")
     .min(8, "Пароль должен содержать минимум 8 символов")

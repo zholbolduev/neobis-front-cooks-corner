@@ -1,59 +1,76 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useEffect } from "react";
 import CardEntities from "../../../entities/CardEntities/CardEntities";
 import "./CardListWidget.scss";
+import axios from "axios";
+import { baseAPI } from "../../../shared/baseAPI";
 
 const CardListWidget = () => {
-  const [activeTab, setActiveTab] = useState<string>("Breakfast");
+  const [activeTab, setActiveTab] = useState<string>("breakfast");
+  const [cardList, setCardList] = useState([]);
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
 
-  // в конце useEffcet
-  //   setActiveTab("Popular");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const user = JSON.parse(localStorage.getItem("user") || "");
+        const accessToken = user.accessToken;
+        console.log(accessToken);
 
-  // ------------Временный старт-------------
-  const cardlist = [];
+        const response = await axios.get(
+          `${baseAPI}/api/recipes/get_by_category?category=${activeTab}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        console.log(response.data);
+        setCardList(response.data);
+      } catch (error) {
+        console.error("Error fetching recipe data:", error);
+      }
+    };
 
-  for (let i = 0; i < 20; i++) {
-    const id = i + 1;
-    const name = `Card ${id}`;
-    const author = `Author ${id}`;
-    const img = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&usqp=CAU`;
-
-    cardlist.push({ id, name, author, img });
-  }
-  // ------------Временный финиш-------------
+    fetchData();
+  }, [activeTab]);
 
   return (
     <div className="cardListWidget">
       <h2>Category</h2>
 
       <ul>
-        <li className={activeTab === "Breakfast" ? "active" : ""}>
-          <a onClick={() => handleTabClick("Breakfast")}>Breakfast</a>
-          {activeTab === "Breakfast" && <p className="breackP"></p>}
+        <li className={activeTab === "breakfast" ? "active" : ""}>
+          <a onClick={() => handleTabClick("breakfast")}>Breakfast</a>
+          {activeTab === "breakfast" && <p className="breackP"></p>}
         </li>
 
-        <li className={activeTab === "Lunch" ? "active" : ""}>
-          <a onClick={() => handleTabClick("Lunch")}>Lunch</a>
-          {activeTab === "Lunch" && <p className="lunchP"></p>}
+        <li className={activeTab === "lunch" ? "active" : ""}>
+          <a onClick={() => handleTabClick("lunch")}>Lunch</a>
+          {activeTab === "lunch" && <p className="lunchP"></p>}
         </li>
 
-        <li className={activeTab === "Dinner" ? "active" : ""}>
-          <a onClick={() => handleTabClick("Dinner")}>Dinner</a>
-          {activeTab === "Dinner" && <p className="dinnerP"></p>}
+        <li className={activeTab === "dinner" ? "active" : ""}>
+          <a onClick={() => handleTabClick("dinner")}>Dinner</a>
+          {activeTab === "dinner" && <p className="dinnerP"></p>}
         </li>
       </ul>
 
       <div className="cardListWidget__list">
-        {cardlist.slice(0, 12).map((card) => (
+        {cardList.slice(0, 12).map((card: any) => (
           <CardEntities
             key={card.id}
             id={card.id}
-            name={card.name}
+            recipeName={card.recipeName}
+            imageUrl={card.imageUrl}
             author={card.author}
-            img={card.img}
+            likesQuantity={card.likesQuantity}
+            savesQuantity={card.savesQuantity}
+            isSaved={card.isSaved}
+            isLiked={card.isLiked}
           />
         ))}
       </div>

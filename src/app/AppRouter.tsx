@@ -7,6 +7,7 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import SearchPage from "../pages/SearchPage/SearchPage";
 import DetailsPage from "../pages/DetailsPage/DetailsPage";
+import VerificationPage from "../pages/VerificationPage/VerificationPage";
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,8 @@ const AppRouter = () => {
       </Route>
 
       <Route path="/register" element={<SignUpPage />} />
+
+      <Route path="/verification" element={<VerificationPage />} />
 
       <Route path="/login" element={<SignInPage />} />
 

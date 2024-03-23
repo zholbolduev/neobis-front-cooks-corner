@@ -36,7 +36,7 @@ const SignUpFeatures = () => {
 
   const initialValues: IRegister = {
     email: "",
-    username: "",
+    name: "",
     password: "",
     confirmPassword: "",
   };
@@ -52,7 +52,7 @@ const SignUpFeatures = () => {
   };
 
   if (isRegistered) {
-    navigate("/");
+    navigate("/verification");
   }
 
   return (
@@ -71,7 +71,7 @@ const SignUpFeatures = () => {
                 <span className="signUp__form__label--name">Name</span>
 
                 <Field
-                  name="username"
+                  name="name"
                   placeholder="Enter your name"
                   className="signUp__form--inputs"
                 />
@@ -105,7 +105,7 @@ const SignUpFeatures = () => {
                 />
 
                 <ErrorMessage
-                  name="username"
+                  name="name"
                   component="p"
                   className="errorMessage"
                 />
@@ -162,7 +162,7 @@ const SignUpFeatures = () => {
               <button
                 className={
                   values.email &&
-                  values.username &&
+                  values.name &&
                   values.password &&
                   values.confirmPassword
                     ? "signUp__form--fullBtn"

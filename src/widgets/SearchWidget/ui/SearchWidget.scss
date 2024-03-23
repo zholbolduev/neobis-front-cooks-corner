@@ -1,0 +1,70 @@
+@import "../../../shared/variables.scss";
+
+.searchWidget {
+  position: relative;
+  &--h2 {
+    color: $text;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &__btnsBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 32px;
+
+    &__radius {
+      width: 480px;
+      gap: 5px;
+      flex-shrink: 0;
+      border-radius: 100px;
+      background: var(--Secondary, $beige);
+      height: 64px;
+      padding: 8px 18px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      > button {
+        color: $text;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 28px;
+        background: transparent;
+        display: flex;
+        width: 50%;
+        height: 44px;
+        padding: 4px 48px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+
+      > button:hover {
+        border-radius: 100px;
+        background: var(--Primary, $orange);
+        color: $white;
+        transition: 250ms;
+      }
+
+      .active {
+        border-radius: 100px;
+        background: var(--Primary, $orange);
+        color: $white;
+        transition: 250ms;
+      }
+    }
+  }
+
+  &__addRecipe {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

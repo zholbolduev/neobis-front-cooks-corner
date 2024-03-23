@@ -8,7 +8,7 @@ export const SignUpAPI =
   (
     data: {
       email: string;
-      username: string;
+      name: string;
       password: string;
       confirmPassword: string;
     },

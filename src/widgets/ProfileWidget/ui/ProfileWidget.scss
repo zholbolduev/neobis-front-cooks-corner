@@ -6,8 +6,8 @@
     align-items: center;
     justify-content: center;
     gap: 51px;
-    margin-bottom: 95px;
-    margin-top: 80px;
+    margin-bottom: 35px;
+    margin-top: 10px;
 
     &__img {
       > img {
@@ -113,6 +113,62 @@
       flex-direction: column;
       margin-top: 0px;
       gap: 10px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 2200px) {
+    &__list {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 1780px) {
+    &__list {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 1270px) {
+    &__list {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 870px) {
+    &__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__btnsBlock {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+
+    > button {
+      color: var(--Icon-Faded, $TFaded);
+      text-align: center;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 28px;
+      background-color: transparent;
+    }
+
+    > button:hover {
+      color: $text;
     }
   }
 
