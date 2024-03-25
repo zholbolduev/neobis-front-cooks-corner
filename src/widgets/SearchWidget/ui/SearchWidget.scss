@@ -9,6 +9,12 @@
     font-weight: 500;
   }
 
+  @media screen and (max-width: 466px) {
+    &--h2 {
+      font-size: 14px;
+    }
+  }
+
   &__btnsBlock {
     display: flex;
     justify-content: center;
@@ -61,6 +67,32 @@
     }
   }
 
+  @media screen and (max-width: 574px) {
+    &__btnsBlock {
+      &__radius {
+        width: 250px;
+        height: 40px;
+        padding: 8px 8px;
+
+        > button {
+          height: 30px;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    &__btnsBlock {
+      &__radius {
+        width: 170px;
+
+        > button {
+          padding: 0px 0px 0px 0px;
+        }
+      }
+    }
+  }
   &__addRecipe {
     position: fixed;
     bottom: 20px;

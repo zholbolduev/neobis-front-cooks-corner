@@ -15,9 +15,20 @@
     }
   }
 
+  @media screen and (max-width: 466px) {
+    &__searchBlock {
+      > input {
+        height: 34px;
+        margin-left: 15px;
+        padding: 5px 9px;
+        font-size: 10px;
+      }
+    }
+  }
+
   &__cardsBlock {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
     margin-top: 61px;
 
@@ -68,6 +79,13 @@
           margin-right: 4px;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 1081) {
+    &__cardsBlock {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
     }
   }
 }

@@ -11,7 +11,7 @@ interface ModalUserProps {
 const ModalUser: React.FC<ModalUserProps> = ({ closeModal }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [name, setName] = useState<string>("");
-  const [bio, setBio] = useState<string>("");
+  const [biography, setBiography] = useState<string>("");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
@@ -20,13 +20,14 @@ const ModalUser: React.FC<ModalUserProps> = ({ closeModal }) => {
     }
   };
 
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
   const accessToken = user.accessToken;
+  console.log(accessToken);
 
   const updateProfile = async () => {
     try {
       const formData = new FormData();
-      formData.append("dto", JSON.stringify({ name, biography: bio }));
+      formData.append("dto", JSON.stringify({ name, biography }));
       if (selectedImage) {
         formData.append("image", selectedImage);
       }
@@ -67,14 +68,14 @@ const ModalUser: React.FC<ModalUserProps> = ({ closeModal }) => {
         </label>
 
         <label>
-          Change your bio
+          Change your biography
           <input
             type="text"
             name=""
             className="greyInput"
-            placeholder="Enter your bio"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
+            placeholder="Enter your biography"
+            value={biography}
+            onChange={(e) => setBiography(e.target.value)}
           />
         </label>
 
