@@ -15,7 +15,7 @@ interface Ingredient {
 }
 
 const AddRecipeFeature: React.FC<ModalUserProps> = ({ closeModal }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("easy");
 
   const [recipeData, setRecipeData] = useState<{
@@ -52,8 +52,7 @@ const AddRecipeFeature: React.FC<ModalUserProps> = ({ closeModal }) => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedImage(imageUrl);
+      setSelectedImage(file);
     }
   };
 
@@ -88,14 +87,18 @@ const AddRecipeFeature: React.FC<ModalUserProps> = ({ closeModal }) => {
     try {
       const user = JSON.parse(localStorage.getItem("user") || "{}");
       const accessToken = user.accessToken;
-      console.log(accessToken);
+
+      const formData = new FormData();
+      formData.append("recipeDto", JSON.stringify(recipeData));
+      if (selectedImage) {
+        formData.append("photo", selectedImage);
+      }
 
       const response = await axios.post(
         `${baseAPI}/api/recipes/add_recipe`,
-        recipeData,
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
         }
@@ -122,9 +125,6 @@ const AddRecipeFeature: React.FC<ModalUserProps> = ({ closeModal }) => {
       <div className="addRecipeFeature__inputs">
         <p className="p">Add a recipe photo</p>
         <label className="imgLabel">
-          {selectedImage && (
-            <img src={selectedImage} alt="Selected" width="80" height="80" />
-          )}
           <input
             onChange={handleImageChange}
             type="file"
