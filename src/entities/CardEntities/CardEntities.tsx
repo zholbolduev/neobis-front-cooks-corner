@@ -81,7 +81,11 @@ const CardEntities: FC<Card> = ({
         }}
       >
         <Link className="link" to={`/details/${id}`} key={id}>
-          <div className="card--name">{recipeName}</div>
+          <div className="card--name">
+            {recipeName.length > 15
+              ? `${recipeName.slice(0, 15)}...`
+              : recipeName}
+          </div>
           <p className="card--author">by {author}</p>
         </Link>
 

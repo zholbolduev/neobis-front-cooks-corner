@@ -16,6 +16,7 @@ const CardListWidget: React.FC = () => {
     const fetchData = async () => {
       const user = JSON.parse(localStorage.getItem("user") || "");
       const accessToken = user.accessToken;
+      console.log(accessToken);
       const data = await fetchRecipesByCategory(activeTab, accessToken);
       setCardList(data);
     };
