@@ -26,7 +26,7 @@
     }
   }
 
-  &__cardsBlock {
+  &__recipeBlock {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
@@ -82,10 +82,41 @@
     }
   }
 
-  @media screen and (max-width: 1081) {
-    &__cardsBlock {
-      display: grid;
+  @media screen and (max-width: 1081px) {
+    &__recipeBlock {
       grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 1081px) {
+    &__recipeBlock {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media screen and (max-width: 754px) {
+    &__recipeBlock {
+      &--card {
+        width: 248px;
+        height: 254px;
+        padding: 5px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 618px) {
+    &__recipeBlock {
+      &--card {
+        width: 208px;
+        height: 254px;
+        padding: 5px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 531px) {
+    &__recipeBlock {
+      grid-template-columns: 1fr;
+      margin-left: 20px;
     }
   }
 }

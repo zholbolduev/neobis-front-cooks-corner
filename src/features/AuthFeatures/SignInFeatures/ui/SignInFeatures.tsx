@@ -46,7 +46,7 @@ const SignInFeatures = () => {
   };
 
   if (isLogined) {
-    navigate("/");
+    navigate("/home");
   }
 
   const handleButtonClick = (values: ILogin) => {
