@@ -1,3 +1,4 @@
+import axios from "axios";
 import "./DashboardWidget.scss";
 import logo from "./assets/logo.svg";
 import logoOn from "./assets/logoOn.svg";
@@ -12,12 +13,35 @@ import { useLocation, useNavigate } from "react-router";
 
 const DashboardWidget = () => {
   const navigate = useNavigate();
-
   const { pathname } = useLocation();
-
   const isHomePage = pathname === "/";
-  const isPfofilePage = pathname === "/profile";
+  const isProfilePage = pathname === "/profile";
   const isSearchPage = pathname === "/search";
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(
+        "https://grumpy-weight-cookercorner.up.railway.app/api/auth/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        navigate("/login");
+      } else {
+        console.error("Failed to logout");
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
+  const confirmLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      handleLogout();
+    }
+  };
 
   return (
     <div className="dashboard">
@@ -43,15 +67,15 @@ const DashboardWidget = () => {
           </div>
           <div
             onClick={() => navigate("/profile")}
-            className={`${"dashboard__btn"} ${isPfofilePage ? "active" : ""}`}
+            className={`${"dashboard__btn"} ${isProfilePage ? "active" : ""}`}
           >
-            <img src={isPfofilePage ? userOn : user} alt="Users" />
+            <img src={isProfilePage ? userOn : user} alt="Users" />
           </div>
         </div>
 
         <div className="dashboard__bottom">
-          <div onClick={() => navigate("/login")} className="dashboard__btn">
-            <img src={logout} alt="" />
+          <div onClick={confirmLogout} className="dashboard__btn">
+            <img src={logout} alt="Logout" />
           </div>
         </div>
       </div>
