@@ -15,6 +15,8 @@ export const fetchRecipes = async (
         query: searchQuery,
       },
     });
+    console.log(response.data);
+
     return response.data;
   } catch (error) {
     console.error("Error searching recipes:", error);

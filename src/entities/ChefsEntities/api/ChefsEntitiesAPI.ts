@@ -15,6 +15,7 @@ export const fetchChefs = async (
         query: searchQuery,
       },
     });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error searching chefs:", error);

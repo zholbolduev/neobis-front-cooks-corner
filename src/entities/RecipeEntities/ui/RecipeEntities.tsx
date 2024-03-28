@@ -6,17 +6,13 @@ import liked from "../../../shared/assets/like.svg";
 import saved from "../../../shared/assets/saved.svg";
 import unsaved from "../../../shared/assets/unsaved.svg";
 import "./RecipeEntities.scss";
-// import axios from "axios";
-// import { baseAPI } from "../../../shared/baseAPI";
+import { useNavigate } from "react-router";
 
 const RecipeEntities: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [recipes, setRecipes] = useState<IRecipe[]>([]);
 
-  // const [savedQuantity, setSavedQuantity] = useState(savesQuantity);
-  // const [likedQuantity, setLikedQuantity] = useState(likesQuantity);
-  // const [savedState, setSavedState] = useState<boolean>(isSaved);
-  // const [likedState, setLikedState] = useState<boolean>(isLiked);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") || "");
@@ -36,54 +32,6 @@ const RecipeEntities: React.FC = () => {
     setSearchQuery(event.target.value);
   };
 
-  // const handleLikeClick = async () => {
-  //   try {
-  //     const user = JSON.parse(localStorage.getItem("user") || "");
-  //     const accessToken = user.accessToken;
-  //     console.log(accessToken);
-
-  //     const response = await axios.put(
-  //       `${baseAPI}/api/actions/like/${id}`,
-  //       {},
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       }
-  //     );
-  //     if (response.status === 200) {
-  //       setLikedState(!likedState);
-  //       setLikedQuantity(likedState ? likedQuantity - 1 : likedQuantity + 1);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error occurred while liking:", error);
-  //   }
-  // };
-
-  // const handleSaveClick = async () => {
-  //   try {
-  //     const user = JSON.parse(localStorage.getItem("user") || "");
-  //     const accessToken = user.accessToken;
-  //     console.log(accessToken);
-
-  //     const response = await axios.put(
-  //       `${baseAPI}/api/actions/mark/${id}`,
-  //       {},
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       }
-  //     );
-  //     if (response.status === 200) {
-  //       setSavedState(!savedState);
-  //       setSavedQuantity(savedState ? savedQuantity - 1 : savedQuantity + 1);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error occurred while saving:", error);
-  //   }
-  // };
-
   return (
     <div className="recipeEntities">
       <div className="recipeEntities__searchBlock">
@@ -97,7 +45,11 @@ const RecipeEntities: React.FC = () => {
 
       <div className="recipeEntities__recipeBlock">
         {recipes.map((recipe, id) => (
-          <div key={id} className="recipeEntities__recipeBlock--card">
+          <div
+            onClick={() => navigate(`/details/${id}`)}
+            key={id}
+            className="recipeEntities__recipeBlock--card"
+          >
             <img
               className="recipeEntities__recipeBlock--card--photo"
               src={recipe.imageUrl}
